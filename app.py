@@ -69,7 +69,6 @@ footer {visibility:hidden;}
     color: #0a3157 !important;
 }
 
-</style>
 """, unsafe_allow_html=True)
 
 # ---------- Navigation ----------
