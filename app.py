@@ -49,6 +49,8 @@ div[data-testid="stMetric"] { background:white; border:1px solid #e2eaf2; paddin
 a { color:#087ba8 !important; }
 footer {visibility:hidden;}
 </style>
+
+
 """, unsafe_allow_html=True)
 
 # ---------- Navigation ----------
