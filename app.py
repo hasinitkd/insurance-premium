@@ -52,19 +52,56 @@ footer {visibility:hidden;}
 """, unsafe_allow_html=True)
 
 # ---------- Navigation ----------
-nav1, nav2, nav3, nav4, nav5 = st.columns([2.3, 1, 1, 1, 1])
-with nav1:
-    st.markdown("## 🛡️ **CareShield**")
-with nav2:
-    st.markdown("<div style='padding-top:14px'>[Home](#home)</div>", unsafe_allow_html=True)
-with nav3:
-    st.markdown("<div style='padding-top:14px'>[Plans](#plans)</div>", unsafe_allow_html=True)
-with nav4:
-    st.markdown("<div style='padding-top:14px'>[Benefits](#benefits)</div>", unsafe_allow_html=True)
-with nav5:
-    st.markdown("<div style='padding-top:14px'>[FAQs](#faqs)</div>", unsafe_allow_html=True)
+
+# ---------- Navigation ----------
+st.markdown("""
+<style>
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2eaf2;
+}
+
+.nav-brand {
+    font-size: 25px;
+    font-weight: 800;
+    color: #0a3157;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #0a3157 !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #ed6a24 !important;
+}
+</style>
+
+<div class="nav-container">
+    <div class="nav-brand">🛡️ CareShield</div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#plans">Plans</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#faqs">FAQs</a>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("---")
+
 
 # ---------- Hero ----------
 st.markdown("""
