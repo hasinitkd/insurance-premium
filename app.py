@@ -50,7 +50,6 @@ a { color:#087ba8 !important; }
 footer {visibility:hidden;}
 </style>
 """, unsafe_allow_html=True)
-
 /* Existing CSS */
 footer {visibility:hidden;}
 
