@@ -48,8 +48,7 @@ div[data-testid="stMetric"] { background:white; border:1px solid #e2eaf2; paddin
 .stButton>button:hover, .stDownloadButton>button:hover { background:#d95716; color:white; }
 a { color:#087ba8 !important; }
 footer {visibility:hidden;}
-</style>
-/* Existing CSS */
+</style>/* Existing CSS */
 footer {visibility:hidden;}
 
 /* Make input labels and instructions readable */
