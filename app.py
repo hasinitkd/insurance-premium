@@ -48,27 +48,7 @@ div[data-testid="stMetric"] { background:white; border:1px solid #e2eaf2; paddin
 .stButton>button:hover, .stDownloadButton>button:hover { background:#d95716; color:white; }
 a { color:#087ba8 !important; }
 footer {visibility:hidden;}
-</style>/* Existing CSS */
-footer {visibility:hidden;}
-
-/* Make input labels and instructions readable */
-.stApp {
-    color: #172b4d;
-}
-
-[data-testid="stWidgetLabel"] p {
-    color: #172b4d !important;
-    font-weight: 700 !important;
-}
-
-[data-testid="stCaptionContainer"] p {
-    color: #61748b !important;
-}
-
-.stMarkdown strong {
-    color: #0a3157 !important;
-}
-
+</style>
 """, unsafe_allow_html=True)
 
 # ---------- Navigation ----------
