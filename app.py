@@ -142,10 +142,34 @@ with st.container(border=True):
                              format_func=lambda x: f"₹{x/100000:.0f} lakh")
     with q5:
         city = st.selectbox("City type", ["Metro", "Non-metro"])
+    
+    # Illness category
+    st.markdown("**Existing Illness / Medical Condition**")
+    st.caption("Select the applicable category for this demonstration.")
+
+    illness = st.selectbox(
+        "Illness",
+        ["No illness", "Mild illness", "Critical illness"],
+        label_visibility="collapsed"
+    )
+    
     age_factor = {"18–30": 1.0, "31–40": 1.18, "41–50": 1.45, "51–60": 1.9, "Above 60": 2.5}[age]
     city_factor = 1.12 if city == "Metro" else 1.0
+    
+# Sample illness adjustments
+if illness == "No illness":
+    illness_charge = 0
+elif illness == "Mild illness":
+    illness_charge = 1000
+else:
+    illness_charge = 3000
+
     base = (cover / 100000) * 420
-    estimate = int((base * age_factor * (1 + 0.45 * children + 0.65 * max(adults-1, 0)) * city_factor) / 100) * 100
+    estimate = int((
+    base * age_factor *
+    (1 + 0.45 * children + 0.65 * max(adults-1, 0)) *
+    city_factor + illness_charge
+) / 100) * 100
     if st.button("Calculate indicative premium", use_container_width=True):
         st.success(f"Illustrative annual premium: ₹{estimate:,} (excluding taxes and underwriting adjustments).")
         st.caption("This is a classroom demonstration formula, not an insurer quotation. Actual premiums depend on policy wording, age, location, medical history and underwriting.")
