@@ -125,25 +125,50 @@ m3.metric("Support", "24 × 7", "Help when you need it")
 st.caption("*These are demonstration labels for the student project. Replace with verified insurer data before any real-world use.")
 
 # ---------- Quick quote calculator ----------
+
+# ---------- Quick quote calculator ----------
 st.markdown("<div class='section-title'>Get a quick estimate</div>", unsafe_allow_html=True)
-st.markdown("<p class='muted'>Tell us a little about the cover you are exploring. The estimate is illustrative only.</p>", unsafe_allow_html=True)
+st.markdown(
+    "<p class='muted'>Tell us a little about the cover you are exploring. The estimate is illustrative only.</p>",
+    unsafe_allow_html=True
+)
 
 with st.container(border=True):
     q1, q2, q3 = st.columns(3)
+
     with q1:
-        adults = st.number_input("Adults (18 years & above)", min_value=1, max_value=6, value=1, step=1)
+        adults = st.number_input(
+            "Number of Adults (18 years & above)",
+            min_value=1, max_value=6, value=1, step=1
+        )
+
     with q2:
-        children = st.number_input("Children", min_value=0, max_value=6, value=0, step=1)
+        children = st.number_input(
+            "Number of Children",
+            min_value=0, max_value=6, value=0, step=1
+        )
+
     with q3:
-        age = st.selectbox("Age of eldest adult", ["18–30", "31–40", "41–50", "51–60", "Above 60"])
+        age = st.selectbox(
+            "Age of Eldest Adult",
+            ["18–30", "31–40", "41–50", "51–60", "Above 60"]
+        )
+
     q4, q5 = st.columns(2)
+
     with q4:
-        cover = st.selectbox("Sum insured", [300000, 500000, 1000000, 1500000, 2500000],
-                             format_func=lambda x: f"₹{x/100000:.0f} lakh")
+        cover = st.selectbox(
+            "Sum Insured",
+            [300000, 500000, 1000000, 1500000, 2500000],
+            format_func=lambda x: f"₹{x/100000:.0f} lakh"
+        )
+
     with q5:
-        city = st.selectbox("City type", ["Metro", "Non-metro"])
-    
-    # Illness category
+        city = st.selectbox(
+            "City Type",
+            ["Metro", "Non-metro"]
+        )
+
     st.markdown("**Existing Illness / Medical Condition**")
     st.caption("Select the applicable category for this demonstration.")
 
@@ -152,11 +177,19 @@ with st.container(border=True):
         ["No illness", "Mild illness", "Critical illness"],
         label_visibility="collapsed"
     )
-    
-    age_factor = {"18–30": 1.0, "31–40": 1.18, "41–50": 1.45, "51–60": 1.9, "Above 60": 2.5}[age]
-    city_factor = 1.12 if city == "Metro" else 1.0
-    
-# Sample illness adjustments
+
+# ---------- Premium calculation ----------
+
+age_factor = {
+    "18–30": 1.0,
+    "31–40": 1.18,
+    "41–50": 1.45,
+    "51–60": 1.9,
+    "Above 60": 2.5
+}[age]
+
+city_factor = 1.12 if city == "Metro" else 1.0
+
 if illness == "No illness":
     illness_charge = 0
 elif illness == "Mild illness":
@@ -164,15 +197,29 @@ elif illness == "Mild illness":
 else:
     illness_charge = 3000
 
-    base = (cover / 100000) * 420
-    estimate = int((
+base = (cover / 100000) * 420
+
+estimate = int((
     base * age_factor *
-    (1 + 0.45 * children + 0.65 * max(adults-1, 0)) *
+    (1 + 0.45 * children + 0.65 * max(adults - 1, 0)) *
     city_factor + illness_charge
 ) / 100) * 100
-    if st.button("Calculate indicative premium", use_container_width=True):
-        st.success(f"Illustrative annual premium: ₹{estimate:,} (excluding taxes and underwriting adjustments).")
-        st.caption("This is a classroom demonstration formula, not an insurer quotation. Actual premiums depend on policy wording, age, location, medical history and underwriting.")
+
+# ---------- Calculate button and result ----------
+
+if st.button("Calculate indicative premium", use_container_width=True):
+    st.success(f"Illustrative annual premium: ₹{estimate:,}")
+
+    st.write("### Premium Breakdown")
+    st.write(f"Base premium: ₹{base:,.2f}")
+    st.write(f"Age factor: {age_factor}")
+    st.write(f"City adjustment factor: {city_factor}")
+    st.write(f"Illness adjustment: ₹{illness_charge:,}")
+
+    st.caption(
+        "This is a classroom demonstration formula, "
+        "not an actual insurance quotation."
+    )
 
 # ---------- Plans ----------
 st.markdown("<div class='section-title' id='plans'>Choose a plan that fits your life</div>", unsafe_allow_html=True)
